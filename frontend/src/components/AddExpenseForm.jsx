@@ -22,7 +22,7 @@ export default function AddExpenseForm({ onSaved }) {
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SR) return setMsg('Voice input needs Chrome, Edge or Safari.');
     if (listening) return rec.current.stop();
-    const r = rec.current = new SR(); r.lang = lang; r.interimResults = true; r.continuous = true;
+    const r = rec.current = new SR(); r.lang = lang; r.interimResults = true; r.continuous = false;
     base.current = desc ? desc.trim() + ' ' : '';
     r.onresult = e => { let t = ''; for (let i = 0; i < e.results.length; i++) t += e.results[i][0].transcript; setDesc((base.current + t).trim()); };
     r.onend = () => setListening(false);
