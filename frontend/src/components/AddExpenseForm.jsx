@@ -5,7 +5,7 @@ import { nowLocal, dkey } from '../utils/dates.js';
 export default function AddExpenseForm({ onSaved }) {
   const yearAgo = () => { const d = new Date(); d.setFullYear(d.getFullYear() - 1); return dkey(d) + 'T00:00'; };
   const [amount, setAmount] = useState(''), [when, setWhen] = useState(nowLocal()), [desc, setDesc] = useState('');
-  const [lang, setLang] = useState('en-IN'), [msg, setMsg] = useState(''), [listening, setListening] = useState(false);
+  const [lang, setLang] = useState(() => localStorage.getItem('voiceLang') || 'en-IN'), [msg, setMsg] = useState(''), [listening, setListening] = useState(false);
   const rec = useRef(), base = useRef('');
 
   const save = async () => {
@@ -43,7 +43,7 @@ export default function AddExpenseForm({ onSaved }) {
       <textarea id="desc" rows="5" placeholder="What was it for?" value={desc} onChange={e => setDesc(e.target.value)} />
       <p className="hint">{listening ? 'Listening… speak now, then tap Stop.' : 'Type it, or tap the mic and speak. You can edit the text before saving.'}</p>
       <div className="row">
-        <select aria-label="Voice language" value={lang} onChange={e => setLang(e.target.value)}>
+        <select aria-label="Voice language" value={lang} onChange={e => { setLang(e.target.value); localStorage.setItem('voiceLang', e.target.value); }}>
           <option value="en-IN">English</option><option value="ta-IN">Tamil</option><option value="hi-IN">Hindi</option>
           <option value="te-IN">Telugu</option><option value="ml-IN">Malayalam</option><option value="kn-IN">Kannada</option></select>
         <button className={'mic' + (listening ? ' rec' : '')} onClick={mic}>{listening ? '⏹ Stop' : '🎤 Speak'}</button>
