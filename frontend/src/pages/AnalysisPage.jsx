@@ -5,8 +5,8 @@ import Stats from '../components/Stats.jsx';
 import Report from '../components/ReportPanel.jsx';
 import RangeHistory from '../components/RangeHistory.jsx';
 
-export default function AnalysisPage({ data }) {
-  const s = useMemo(() => computeStats(data), [data]);
+export default function AnalysisPage({ data, start }) {
+  const s = useMemo(() => computeStats(data, start), [data, start]);
   return <><h1 className="title">Check</h1>
     <section className="card"><h2>Spending</h2>
       <Stats items={[['Today', money(s.T)], ['This week', money(s.W)], ['This month', money(s.M)]]} />

@@ -26,7 +26,7 @@ function Shell({ me }) {
     <main className="main">
       {page === 'add' && <AddPage data={data} onSaved={reload} onDelete={remove} onViewAll={() => setPage('history')} />}
       {page === 'history' && <HistoryPage data={data} onDelete={remove} />}
-      {page === 'analysis' && <AnalysisPage data={data} />}
+      {page === 'analysis' && <AnalysisPage data={data} start={me.createdAt} />}
     </main>
   </div>;
 }
