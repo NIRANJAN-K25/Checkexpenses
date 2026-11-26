@@ -18,7 +18,7 @@ export default function Login({ onLogin }) {
     return () => { dead = true; clearTimeout(t); };
   }, []);
   return <div className="login">
-    <div className="lbrand"><div className="brand"><i>₹</i>Checkexprense</div>
+    <div className="lbrand"><div className="brand"><i>₹</i>Checkexpense</div>
       <h1>Know where every rupee goes.</h1><p>Log an expense in seconds. Type it or say it, then see the pattern.</p></div>
     <div className="lcard"><h2>Sign in</h2><p className="mut">Continue with your Google account.</p>
       <div ref={btn} /><p className="bad">{err}</p></div>

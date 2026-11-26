@@ -22,7 +22,7 @@ function Shell({ me }) {
         <div><b>{me.name}</b><small>{me.email}</small></div>
         <button className="link" onClick={logout}>Log out</button></div>
     </aside>
-    <header className="top"><div className="brand"><i>₹</i>Checkexprense</div><button className="link" onClick={logout}>Log out</button></header>
+    <header className="top"><div className="brand"><i>₹</i>Checkexpense</div><button className="link" onClick={logout}>Log out</button></header>
     <main className="main">
       {page === 'add' && <AddPage data={data} onSaved={reload} onDelete={remove} onViewAll={() => setPage('history')} />}
       {page === 'history' && <HistoryPage data={data} onDelete={remove} />}

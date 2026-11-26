@@ -1,8 +1,9 @@
 import { useState, useRef } from 'react';
 import expenseService from '../services/expenseService.js';
-import { nowLocal } from '../utils/dates.js';
+import { nowLocal, dkey } from '../utils/dates.js';
 
 export default function AddExpenseForm({ onSaved }) {
+  const yearAgo = () => { const d = new Date(); d.setFullYear(d.getFullYear() - 1); return dkey(d) + 'T00:00'; };
   const [amount, setAmount] = useState(''), [when, setWhen] = useState(nowLocal()), [desc, setDesc] = useState('');
   const [lang, setLang] = useState('en-IN'), [msg, setMsg] = useState(''), [listening, setListening] = useState(false);
   const rec = useRef(), base = useRef('');
@@ -11,6 +12,7 @@ export default function AddExpenseForm({ onSaved }) {
     setMsg('');
     if (amount === '' || +amount < 0) return setMsg('Enter an amount.');
     if (new Date(when) > new Date()) return setMsg('Date cannot be in the future.');
+    if (new Date(when) < new Date(yearAgo())) return setMsg('You can only add dates from the last 1 year.');
     try {
       await expenseService.create({ amount, date: new Date(when).toISOString(), description: desc.trim() });
       setAmount(''); setDesc(''); setWhen(nowLocal()); setMsg('Saved.'); onSaved();
@@ -31,9 +33,9 @@ export default function AddExpenseForm({ onSaved }) {
     <div>
       <label className="lbl" htmlFor="amount">Amount</label>
       <div className="amt-wrap"><span className="cur">₹</span>
-        <input id="amount" className="amt" type="number" inputMode="decimal" min="0" step="0.01" placeholder="0" value={amount} onChange={e => setAmount(e.target.value)} /></div>
+        <input id="amount" className="amt" type="number" inputMode="decimal" enterKeyHint="done" onKeyDown={e => e.key === 'Enter' && e.target.blur()} min="0" step="0.01" placeholder="0" value={amount} onChange={e => setAmount(e.target.value)} /></div>
       <label className="lbl" htmlFor="when">Date and time</label>
-      <input id="when" type="datetime-local" max={nowLocal()} value={when} onChange={e => setWhen(e.target.value)} />
+      <input id="when" type="datetime-local" min={yearAgo()} max={nowLocal()} value={when} onChange={e => setWhen(e.target.value)} />
       <button className="link" onClick={() => setWhen(nowLocal())}>Set to now</button>
     </div>
     <div>
