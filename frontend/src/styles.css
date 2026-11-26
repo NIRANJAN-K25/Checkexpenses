@@ -1,6 +1,6 @@
 :root{--plum:#231a38;--plum2:#34294f;--bg:#f3f1f7;--card:#fff;--ink:#1d1631;--mut:#6f6785;--line:#e3dfee;--gold:#15b004;--goldink:#06301f;--teal:#1f8a7a;--bad:#c0392b;--serif:"Iowan Old Style",Georgia,serif}
 @media(prefers-color-scheme:dark){:root{--plum:#0e0919;--plum2:#241a3b;--bg:#150f24;--card:#201736;--ink:#efeaf9;--mut:#a79fc0;--line:#352a52;--gold:#179a08;--teal:#4fd1bd;--bad:#ff8a80}}
-*{box-sizing:border-box}html,body{overflow-x:hidden}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}html,body{overflow-x:clip}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
 h1,h2{margin:0}h2{font-size:1.05rem}.title{font:700 2rem var(--serif);margin-bottom:20px}.mut{color:var(--mut)}.bad{color:var(--bad)}.ok{color:var(--teal)!important}
 input,select,textarea,button{font:inherit;color:inherit;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px 12px;width:100%;min-width:0}
 textarea{resize:vertical}button{width:auto;cursor:pointer}
